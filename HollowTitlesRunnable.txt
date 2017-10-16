@@ -1,0 +1,90 @@
+package com.hollowPlugins.HollowTitles;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.scheduler.BukkitRunnable;
+
+public class HollowTitlesRunnable extends BukkitRunnable {
+
+	private int currentIndex;
+	private Set<String> keys;
+	private HollowTitles _plugin;
+	private YamlConfiguration easyTitlesPlayers;
+	private ArrayList<String> playerNames;
+
+	public HollowTitlesRunnable(HollowTitles plugin) {
+		this._plugin = plugin;
+		File easyTitlesFile = new File("plugins/EasyTitles", "players.yml"); 
+		
+		easyTitlesPlayers = YamlConfiguration.loadConfiguration(easyTitlesFile);
+		
+		keys = easyTitlesPlayers.getConfigurationSection("EasyTitles.Players").getKeys(false);
+		playerNames = new ArrayList<String>();
+		playerNames.addAll(keys);
+		
+		currentIndex = 0;
+	}
+
+	@Override
+	public void run() {
+		_parsePlayers();
+	}
+	
+	private void _parsePlayers() {
+		String title;
+		String group;
+		String format;
+		List<String> customTitles;
+		String previousTitle;
+		String player;
+		
+		int total = playerNames.size();
+		int start = currentIndex;
+		
+		for (int i = start; i < start + 100; i++) {
+			if (currentIndex > playerNames.size() - 1) {
+				_plugin.log(">>>>>> MIGRATION COMPLETE!!!");
+				this.cancel();
+				break;
+			}
+			player = playerNames.get(i);
+			
+			title = easyTitlesPlayers.getString("EasyTitles.Players." + player + ".Title", null);
+			group = easyTitlesPlayers.getString("EasyTitles.Players." + player + ".Group", null);
+			format = easyTitlesPlayers.getString("EasyTitles.Players." + player + ".Format", null);
+			
+			previousTitle = easyTitlesPlayers.getString("EasyTitles.Players." + player + ".PreviousTitle", null);
+			customTitles = easyTitlesPlayers.getStringList("EasyTitles.Players." + player + ".CustomTitles");
+			
+			if (title != null) {
+				_plugin.conf.set(_plugin.PLAYERS_CONFIG, "Players." + player.toLowerCase() + ".Title", title);
+			}
+			
+			if (group != null) {
+				_plugin.conf.set(_plugin.PLAYERS_CONFIG, "Players." + player.toLowerCase() + ".Group", group);
+			}
+			
+			if (format != null) {
+				_plugin.conf.set(_plugin.PLAYERS_CONFIG, "Players." + player.toLowerCase() + ".Format", format);
+			}
+			
+			if (previousTitle != null) {
+				_plugin.conf.set(_plugin.PLAYERS_CONFIG, "Players." + player.toLowerCase() + ".PreviousTitle", previousTitle);
+			}
+			
+			if (customTitles.size() != 0) {
+				_plugin.conf.set(_plugin.PLAYERS_CONFIG, "Players." + player.toLowerCase() + ".CustomTitles", customTitles);
+			}
+			currentIndex++;
+			
+		}
+		
+		_plugin.log("MIGRATION " + currentIndex + " / " + total + " complete...");
+	}
+
+
+}

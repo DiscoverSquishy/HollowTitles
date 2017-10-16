@@ -1,0 +1,32 @@
+HollowTitles:
+  Version: '1.0.1'
+  ListWidth: 4
+  ListHeight: 5
+  DefaultFormat: '&f[&2@&f] &7%1$s: &f%2$s'
+  DefaultTitle: Traveler
+  Sentences:
+    titleChange: '&fYour title has been changed to "&3[title]&f"'
+    titleClear: '&fYour title has been cleared.'
+    noTitles: '&fYou have no titles available.'
+    suggestion: '&7&oDid you mean any of these titles?'
+    tooMany: '&e&oToo many matches!&f Please be more specific.'
+    noResult: '&e&oNo titles found with the text &f"&3[title]&f"'
+    invalidTitle: '&ePlease enter a valid number or valid title name.'
+    use: 'To use a title type &6&o/title use [TITLE NUMBER] &for &6&o/title use [TITLE NAME]'
+    list: 'You can list your titles by typing &6&o/title list [PAGE NUMBER]'
+    customTitleAdd: '&fThe title &3[title] &fhave been &cadded &fto player &6[player]'
+    customTitleRemove: '&fThe title &3[title] &fhave been &cremoved &ffrom player &6[player]'
+    customTitleFail: '&cFailed to update &f[player] &ccustom titles'
+    playerCustomTitleAdd: '&fSomeone added the title &3[title] &fto your titles list!'
+    playerCustomTitleRemove: '&fSomeone removed the title &3[title] &ffrom your titles list!'
+    customTitleTooLong: 'What are you doing, making a title that long, heh? xD'
+    playerCustomTitleListEmpty: '&fNo custom titles for &2[player]'
+    lockedTitle: '&3Your title is locked, you cannot change it!'
+    playerTitleChange: '&cSomeone changed your title to &2&o[title]'
+  Groups:
+    Traveler:
+      Rank: 10
+      Format: '&f[&2@&f] &7%1$s: &f%2$s'
+      Titles:
+      - Traveler
+  CustomTitleMaxLength: 20

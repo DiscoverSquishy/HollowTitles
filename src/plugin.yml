@@ -1,0 +1,35 @@
+author: ptiber
+name: HollowTitles
+description: HollowWorld titles plugin
+author: DiscoverSquishy
+main: com.hollowPlugins.HollowTitles.HollowTitles
+version: 1.0.1
+depend: ['HollowCore', 'HollowChat']
+commands:
+    title:
+      description: HollowTitles base command
+      usage: To use HollowTitles type /<command> help
+permissions:
+    hollowTitles.admin.*:
+        description: Admin permission
+        default: op
+    hollowTitles.admin.addtitle:
+        description: Admin add title permission
+    hollowTitles.admin.removetitle:
+        description: Admin remove title permission
+    hollowTitles.admin.listgroups:
+        description: Admin list groups permission
+    hollowTitles.admin.reload:
+        description: Reload EasyTitles config
+    hollowTitles.admin.customTitles.*:
+        description: Admin custom titles permission
+        children:
+            hollowTitles.admin.customTitles.basic: true
+            hollowTitles.admin.customTitles.toggleLock: true
+            hollowTitles.admin.customTitles.changePlayer: true
+    hollowTitles.admin.customTitles.basic:
+         description: Admin custom titles add / remove / list permission
+    hollowTitles.admin.customTitles.toggleLock:
+        description: Admin custom titles change player lock permission
+    hollowTitles.admin.customTitles.changePlayer:
+        description: Admin custom titles change player title permission
